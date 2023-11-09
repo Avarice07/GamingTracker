@@ -13,22 +13,7 @@ namespace GamingTracker
             DateTime date1 = new DateTime(2023, 11, 7, 22, 30 ,50); 
             Console.WriteLine(DateTime.Now.Subtract(date1)+" " +name);
 
-            using (var connection = new SqliteConnection("Data Source=game-Session.db"))
-            {
-                connection.Open();
-
-                var command = connection.CreateCommand();
-                command.CommandText =
-                @"CREATE TABLE IF NOT EXISTS game_session(
-                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                     Start TEXT,
-                     End TEXT,
-                     Duration TEXT
-                     )";
-                command.ExecuteNonQuery();
-                connection.Close();
-
-            }
+            CodingController.CreateTable();
 
             Console.WriteLine("----------------------------------");
             Console.WriteLine("***WELCOME TO GAMING TRACKER***");
