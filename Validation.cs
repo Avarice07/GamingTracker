@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GamingTracker
 {
-    internal class Validation
+    internal static class Validation
     {
+        public static DateTime IsValid(string value)
+        {
+            DateTime d2;
+            while (DateTime.TryParse(value, out d2))
+            {
+                Console.WriteLine("The format should be yyyy-MM-dd HH:mm ex. 1995-08-07 24:22");
+                Console.Write("Please enter the proper date and time format: ");
+                value = value.Trim();
+            }
+            return DateTime.ParseExact(value, "yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture);
+        }
+       
     }
 }
