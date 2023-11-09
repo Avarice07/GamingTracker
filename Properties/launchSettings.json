@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GamingTracker": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\ProgramData\\repo\\GamingTracker"
+    }
+  }
+}

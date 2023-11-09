@@ -8,9 +8,24 @@ namespace GamingTracker
 {
     internal class GamingSession
     {
-        public int Id;
-        public DateTime StartTime;
-        public DateTime EndTime;
-        public int Duration;
+        public int Id { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public DateTime Duration { get; set; }
+
+        public GamingSession() { 
+        
+        }
+
+        public GamingSession(int Id, DateTime StartTime, DateTime EndTime, DateTime Duration)    
+        { 
+            this.Id = Id;
+            this.StartTime = StartTime;
+            this.EndTime = EndTime;
+            this.Duration = Duration;
+        }
+
+        DateTime
+
     }
 }

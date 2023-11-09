@@ -8,5 +8,6 @@ namespace GamingTracker
 {
     internal class UserInput
     {
+    
     }
 }
