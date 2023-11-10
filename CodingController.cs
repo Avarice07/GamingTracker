@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using ConsoleTableExt;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -98,15 +99,38 @@ namespace GamingTracker
             {
                 connection.Open();
 
+                List<GamingSession> tableData = new();
                 var command = connection.CreateCommand();
                 command.CommandText =
-                @"INSERT INTO game_session (Id, Start, End, Duration)
-                  VALUES (@param1, @param2, @param3, @param4)
-                     )";
-                command.ExecuteNonQuery();
-                connection.Close();
+                @"SELECT * FROM game_session";
+                SqliteDataReader reader = command.ExecuteReader();
 
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        tableData.Add(
+                            new GamingSession
+                            {
+                                Id = reader.GetInt32(0),
+                                StartTime = DateTime.Parse(reader.GetString(1)),
+                                EndTime = DateTime.Parse(reader.GetString(2)),
+                                Duration = TimeSpan.Parse(reader.GetString(3))
+
+                            });
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+                ConsoleTableBuilder
+                .From(tableData)
+                .WithFormat(ConsoleTableBuilderFormat.Alternative)
+                .ExportAndWriteLine(TableAligntment.Center);
             }
+        }
         }
 
 
