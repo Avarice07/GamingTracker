@@ -29,16 +29,16 @@ namespace GamingTracker
                         Environment.Exit(0);
                         break;
                     case 1:
-                        View();
+                        CodingController.View();
                         break;
                     case 2:
-                        Add();
+                        CodingController.Insert();
                         break;
                     case 3:
-                        Update();
+                        CodingController.Update();
                         break;
                     case 4:
-                        Delete();
+                        CodingController.Delete();
                         break;
 
                 }
