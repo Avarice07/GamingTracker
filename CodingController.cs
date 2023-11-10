@@ -15,7 +15,7 @@ namespace GamingTracker
 
         public static void CreateTable() 
         {
-            using (var connection = new SqliteConnection("ConfigurationManager.AppSettings[\"Key0\"]"))
+            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"])) 
             {
                 connection.Open();
 
@@ -35,7 +35,7 @@ namespace GamingTracker
 
         public static void Insert()
         {
-            using (var connection = new SqliteConnection("ConfigurationManager.AppSettings[\"Key0\"]"))
+            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
 
@@ -57,7 +57,7 @@ namespace GamingTracker
 
         public static void Update()
         {
-            using (var connection = new SqliteConnection("ConfigurationManager.AppSettings[\"Key0\"]"))
+            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
 
@@ -77,7 +77,7 @@ namespace GamingTracker
 
         public static void Delete()
         {
-            using (var connection = new SqliteConnection("ConfigurationManager.AppSettings[\"Key0\"]"))
+            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
 
@@ -95,7 +95,7 @@ namespace GamingTracker
 
         public static void View()
         {
-            using (var connection = new SqliteConnection("ConfigurationManager.AppSettings[\"Key0\"]"))
+            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
 

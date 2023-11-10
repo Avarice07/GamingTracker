@@ -10,7 +10,7 @@ namespace GamingTracker
         static void Main(string[] args)
         {
             
-            //CodingController.CreateTable();
+            CodingController.CreateTable();
 
             Console.WriteLine("----------------------------------");
             Console.WriteLine("***WELCOME TO GAMING TRACKER***");
