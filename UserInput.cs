@@ -32,7 +32,10 @@ namespace GamingTracker
                         CodingController.View();
                         break;
                     case 2:
-                        CodingController.Insert();
+                        Console.WriteLine("Insert date Ex.1994-08-08 22:09:");
+                        DateTime q = Validation.IsValidDate(Console.ReadLine());
+                        
+                        //CodingController.Insert();
                         break;
                     case 3:
                         CodingController.Update();
