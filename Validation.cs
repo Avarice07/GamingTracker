@@ -23,13 +23,21 @@ namespace GamingTracker
 
         public static int IsValidInt(string value)
         {
-            int i2;
-            while (int.TryParse(value, out i2))
+            while (true)
             {
-                Console.Write("Please enter the proper command: ");
-                value = value.Trim();
+                try
+                {
+                   return int.Parse(value);
+                }
+                catch (Exception e)
+                {
+                    Console.Write("Please enter the proper command: ");
+                    value = Console.ReadLine().Trim();
+                } 
+                
+    
             }
-            return int.Parse(value);
+            return 0;
         }
 
     }

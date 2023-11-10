@@ -19,7 +19,7 @@ namespace GamingTracker
                 Console.WriteLine("Type 3 to Modify session");
                 Console.WriteLine("Type 4 to Delete session");
 
-                //int key = ConvertNum(Console.ReadLine());
+                int key = Validation.IsValidInt(Console.ReadLine());
                 Console.Clear();
 
                 switch (key)
