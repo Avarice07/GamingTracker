@@ -11,12 +11,23 @@ namespace GamingTracker
     {
         public static DateTime IsValidDate(string value)
         {
-            DateTime d2;
-            while (DateTime.TryParse(value, out d2))
+            
+            while (true)
             {
-                Console.WriteLine("The format should be yyyy-MM-dd HH:mm ex. 1995-08-07 24:22");
-                Console.Write("Please enter the proper date and time format: ");
-                value = value.Trim();
+                //Console.WriteLine("The format should be yyyy-MM-dd HH:mm ex. 1995-08-07 24:22");
+                //Console.Write("Please enter the proper date and time format: ");
+                //value = value.Trim();
+
+                try
+                {
+                    return DateTime.ParseExact(value, "yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The format should be yyyy-MM-dd HH:mm ex. 1995-08-07 24:22");
+                    Console.Write("Please enter the proper date and time format: ");
+                    value = value.Trim();
+                }
             }
             return DateTime.ParseExact(value, "yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture);
         }
