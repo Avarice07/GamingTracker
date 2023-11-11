@@ -49,14 +49,13 @@ namespace GamingTracker
 
                 var command = connection.CreateCommand();
                 command.CommandText =
-                @"INSERT INTO game_session (Start, End, Duration)
-                  VALUES (@param1, @param2, @param3, @param4)
-                     )";
+                @"INSERT INTO game_session(Start, End, Duration)
+                  VALUES(@param1, @param2, @param3)";
 
                 command.Parameters.AddWithValue("@param1", session.StartTime);
                 command.Parameters.AddWithValue("@param2", session.EndTime);
                 command.Parameters.AddWithValue("@param3", session.Duration);
-                command.ExecuteNonQuery();
+                _ = command.ExecuteNonQuery();
                 connection.Close();
 
             }
