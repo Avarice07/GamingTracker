@@ -35,20 +35,27 @@ namespace GamingTracker
 
         public static void Insert()
         {
+            Console.WriteLine("What time will you start?? ex. 1995-08-07 24:22");
+            var start = Validation.IsValidDate(Console.ReadLine().Trim());
+            Console.WriteLine("What time will you end?? ex. 1995-08-07 24:22");
+            var end = Validation.IsValidDate(Console.ReadLine().Trim());
+
+            var session = new GamingSession(start, end); 
+
+
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
 
                 var command = connection.CreateCommand();
                 command.CommandText =
-                @"INSERT INTO game_session (Id, Start, End, Duration)
+                @"INSERT INTO game_session (Start, End, Duration)
                   VALUES (@param1, @param2, @param3, @param4)
                      )";
 
-                //command.Parameters.AddWithValue("@param1", Name);
-                //command.Parameters.AddWithValue("@param2", Name);
-                //command.Parameters.AddWithValue("@param3", Name);
-                //command.Parameters.AddWithValue("@param4", Name);
+                command.Parameters.AddWithValue("@param1", session.StartTime);
+                command.Parameters.AddWithValue("@param2", session.EndTime);
+                command.Parameters.AddWithValue("@param3", session.Duration);
                 command.ExecuteNonQuery();
                 connection.Close();
 

@@ -29,7 +29,7 @@ namespace GamingTracker
                     value = value.Trim();
                 }
             }
-            return DateTime.ParseExact(value, "yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture);
+            return DateTime.Now;
         }
 
         public static int IsValidInt(string value)
