@@ -24,9 +24,9 @@ namespace GamingTracker
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("The format should be yyyy-MM-dd HH:mm ex. 1995-08-07 24:22");
+                    Console.WriteLine("The format should be yyyy-MM-dd HH:mm ex. 1995-08-07 22:10");
                     Console.Write("Please enter the proper date and time format: ");
-                    value = value.Trim();
+                    value = Console.ReadLine().Trim();
                 }
             }
             return DateTime.Now;
