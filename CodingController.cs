@@ -65,6 +65,10 @@ namespace GamingTracker
         {
             Console.WriteLine("What is the ID of the session you want to update??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
+            Console.WriteLine("What is the new start time?? ex. 1995-08-07 24:22");
+            var start = Validation.IsValidDate(Console.ReadLine().Trim());
+            Console.WriteLine("What is the new end time?? ex. 1995-08-07 24:22");
+            var end = Validation.IsValidDate(Console.ReadLine().Trim());
 
 
 
@@ -77,9 +81,9 @@ namespace GamingTracker
                 @"UPDATE gaming_session SET Start=@param2, End=@param3, Duration=@param4 WHERE Id=@param1)";
 
                 command.Parameters.AddWithValue("@param1", Id);
-                //command.Parameters.AddWithValue("@param2", Name);
-                //command.Parameters.AddWithValue("@param3", Name);
-                //command.Parameters.AddWithValue("@param4", Name);
+                command.Parameters.AddWithValue("@param2", start);
+                command.Parameters.AddWithValue("@param3", end);
+                command.Parameters.AddWithValue("@param4", start.Subtract(end));
                 command.ExecuteNonQuery();
                 connection.Close();
 
