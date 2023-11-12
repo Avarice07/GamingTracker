@@ -63,6 +63,11 @@ namespace GamingTracker
 
         public static void Update()
         {
+            Console.WriteLine("What is the ID of the session you want to update??");
+            int Id = Validation.IsValidInt(Console.ReadLine().Trim());
+
+
+
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
@@ -71,7 +76,7 @@ namespace GamingTracker
                 command.CommandText =
                 @"UPDATE gaming_session SET Start=@param2, End=@param3, Duration=@param4 WHERE Id=@param1)";
 
-                //command.Parameters.AddWithValue("@param1", Name);
+                command.Parameters.AddWithValue("@param1", Id);
                 //command.Parameters.AddWithValue("@param2", Name);
                 //command.Parameters.AddWithValue("@param3", Name);
                 //command.Parameters.AddWithValue("@param4", Name);
