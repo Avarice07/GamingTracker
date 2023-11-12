@@ -83,6 +83,9 @@ namespace GamingTracker
 
         public static void Delete()
         {
+            Console.WriteLine("What is the ID of the session you want to delete??");
+            int Id = Validation.IsValidInt(Console.ReadLine().Trim());
+            
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
@@ -92,7 +95,7 @@ namespace GamingTracker
                 @"DELETE FROM game_session
                   WHERE Id=@param1";
 
-                //command.Parameters.AddWithValue("@param1", Name);
+                command.Parameters.AddWithValue("@param1", Id);
                 command.ExecuteNonQuery();
                 connection.Close();
 
