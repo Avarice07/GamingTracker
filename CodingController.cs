@@ -75,16 +75,16 @@ namespace GamingTracker
                 connection.Open();
 
                 var command = connection.CreateCommand();
-                command.CommandText = @"UPDATE gaming_session 
-                                      SET Start=@param1, End=@param2, Duration=@param3 
-                                      WHERE Id=@param4";
+                command.CommandText = @"UPDATE game_session 
+                                      SET Start=@param1, End=@param2
+                                      WHERE Id=@param3";
 
 
                 command.Parameters.AddWithValue("@param1", start);
                 command.Parameters.AddWithValue("@param2", end);
-                command.Parameters.AddWithValue("@param3", start.Subtract(end));
-                command.Parameters.AddWithValue("@param4", Id);
-                command.ExecuteNonQuery();
+                //command.Parameters.AddWithValue("@param3", start.Subtract(end));
+                command.Parameters.AddWithValue("@param3", Id);
+                _ = command.ExecuteNonQuery();
                 connection.Close();
 
 
