@@ -70,27 +70,28 @@ namespace GamingTracker
             Console.WriteLine("What is the new end time?? ex. 1995-08-07 24:22");
             var end = Validation.IsValidDate(Console.ReadLine().Trim());
 
-
-
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
                 connection.Open();
 
                 var command = connection.CreateCommand();
-                command.CommandText =
-                @"UPDATE gaming_session SET Start=@param2, End=@param3, Duration=@param4 WHERE Id=@param1)";
+                command.CommandText = @"UPDATE gaming_session 
+                                      SET Start=@param1, End=@param2, Duration=@param3 
+                                      WHERE Id=@param4";
 
-                command.Parameters.AddWithValue("@param1", Id);
-                command.Parameters.AddWithValue("@param2", start);
-                command.Parameters.AddWithValue("@param3", end);
-                command.Parameters.AddWithValue("@param4", start.Subtract(end));
+
+                command.Parameters.AddWithValue("@param1", start);
+                command.Parameters.AddWithValue("@param2", end);
+                command.Parameters.AddWithValue("@param3", start.Subtract(end));
+                command.Parameters.AddWithValue("@param4", Id);
                 command.ExecuteNonQuery();
                 connection.Close();
+
 
             }
         }
 
-        public static void Delete()
+            public static void Delete()
         {
             Console.WriteLine("What is the ID of the session you want to delete??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
