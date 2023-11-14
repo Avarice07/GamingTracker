@@ -95,22 +95,28 @@ namespace GamingTracker
             View();
             Console.WriteLine("What is the ID of the session you want to delete??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
-            
-            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
+            var check = ViewById(Id);
+            if (check.Id != 0) 
             {
-                connection.Open();
+                using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
+                {
+                    connection.Open();
 
-                var command = connection.CreateCommand();
-                command.CommandText =
-                @"DELETE FROM game_session
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                    @"DELETE FROM game_session
                   WHERE Id=@param1";
 
-                command.Parameters.AddWithValue("@param1", Id);
-                command.ExecuteNonQuery();
-                connection.Close();
+                    command.Parameters.AddWithValue("@param1", Id);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+                Console.WriteLine("Session successfully deleted");
 
             }
-            Console.WriteLine("Session successfully deleted");
+            
+            
         }
 
         public static void View()
@@ -173,15 +179,13 @@ namespace GamingTracker
                 }
                 else
                 {
-                    Console.WriteLine("No rows found.");
+                    Console.WriteLine($"No item with the id {Id} was found.");
                 }
                 reader.Close();
 
                 return s;
             }
-        }
+        } 
     }
-
-
-    }
+}
 
