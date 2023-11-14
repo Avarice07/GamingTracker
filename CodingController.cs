@@ -35,9 +35,9 @@ namespace GamingTracker
 
         public static void Insert()
         {
-            Console.WriteLine("What time will you start?? ex. 1995-08-07 24:22");
+            Console.WriteLine("What time will you start?? ex. 1995-08-29 24:22");
             var start = Validation.IsValidDate(Console.ReadLine().Trim());
-            Console.WriteLine("What time will you end?? ex. 1995-08-07 24:22");
+            Console.WriteLine("What time will you end?? ex. 1995-08-29 24:22");
             var end = Validation.IsValidDate(Console.ReadLine().Trim());
 
             var session = new GamingSession(start, end); 
@@ -65,9 +65,9 @@ namespace GamingTracker
         {
             Console.WriteLine("What is the ID of the session you want to update??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
-            Console.WriteLine("What is the new start time?? ex. 1995-08-07 24:22");
+            Console.WriteLine("What is the new start time?? ex. 1995-08-29 24:22");
             var start = Validation.IsValidDate(Console.ReadLine().Trim());
-            Console.WriteLine("What is the new end time?? ex. 1995-08-07 24:22");
+            Console.WriteLine("What is the new end time?? ex. 1995-08-29 24:22");
             var end = Validation.IsValidDate(Console.ReadLine().Trim());
 
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))

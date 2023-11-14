@@ -25,7 +25,7 @@ namespace GamingTracker
                 switch (key)
                 {
                     case 0:
-                        Console.WriteLine("Thank you for useing the app");
+                        Console.WriteLine("Thank you for using the app");
                         Environment.Exit(0);
                         break;
                     case 1:

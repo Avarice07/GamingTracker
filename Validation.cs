@@ -42,7 +42,7 @@ namespace GamingTracker
                 }
                 catch (Exception e)
                 {
-                    Console.Write("Please enter the proper command: ");
+                    Console.Write("Please enter a number from 1-4: ");
                     value = Console.ReadLine().Trim();
                 } 
                 
