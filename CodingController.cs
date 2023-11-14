@@ -63,6 +63,7 @@ namespace GamingTracker
 
         public static void Update()
         {
+            View();
             Console.WriteLine("What is the ID of the session you want to update??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
             Console.WriteLine("What is the new start time?? ex. 1995-08-29 24:22");
@@ -91,8 +92,9 @@ namespace GamingTracker
             }
         }
 
-            public static void Delete()
+        public static void Delete()
         {
+            View();
             Console.WriteLine("What is the ID of the session you want to delete??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
             
