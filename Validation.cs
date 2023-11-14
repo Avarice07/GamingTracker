@@ -31,21 +31,23 @@ namespace GamingTracker
 
         public static int IsValidInt(string value)
         {
-            while (true)
+            while (!int.TryParse(value, out _))
             {
-                try
-                {
-                   return int.Parse(value);
-                }
-                catch (Exception e)
-                {
+                
+                
+                //try
+                //{
+                //   return int.Parse(value);
+                //}
+                //catch (Exception e)
+                //{
                     Console.Write("Please enter a number from 1-4: ");
                     value = Console.ReadLine().Trim();
-                } 
+                //} 
                 
     
             }
-            return 0;
+            return int.Parse(value);
         }
 
     }
