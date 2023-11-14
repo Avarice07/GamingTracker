@@ -55,10 +55,11 @@ namespace GamingTracker
                 command.Parameters.AddWithValue("@param1", session.StartTime);
                 command.Parameters.AddWithValue("@param2", session.EndTime);
                 command.Parameters.AddWithValue("@param3", session.Duration);
-                _ = command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 connection.Close();
 
             }
+            Console.Write("Session successfully added");
         }
 
         public static void Update()
@@ -79,17 +80,14 @@ namespace GamingTracker
                 command.CommandText = @"UPDATE game_session 
                                       SET Start=@param1, End=@param2, Duration=@param3
                                       WHERE Id=@param4";
-
-
                 command.Parameters.AddWithValue("@param1", start);
                 command.Parameters.AddWithValue("@param2", end);
                 command.Parameters.AddWithValue("@param3", start.Subtract(end));
                 command.Parameters.AddWithValue("@param4", Id);
                 command.ExecuteNonQuery();
                 connection.Close();
-
-
             }
+            Console.Write("Session successfully updated");
         }
 
         public static void Delete()
@@ -112,6 +110,7 @@ namespace GamingTracker
                 connection.Close();
 
             }
+            Console.Write("Session successfully deleted");
         }
 
         public static void View()
