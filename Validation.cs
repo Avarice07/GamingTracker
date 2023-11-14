@@ -49,6 +49,5 @@ namespace GamingTracker
             }
             return int.Parse(value);
         }
-
     }
 }
