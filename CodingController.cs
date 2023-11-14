@@ -59,7 +59,7 @@ namespace GamingTracker
                 connection.Close();
 
             }
-            Console.Write("Session successfully added");
+            Console.WriteLine("Session successfully added");
         }
 
         public static void Update()
@@ -87,7 +87,7 @@ namespace GamingTracker
                 command.ExecuteNonQuery();
                 connection.Close();
             }
-            Console.Write("Session successfully updated");
+            Console.WriteLine("Session successfully updated");
         }
 
         public static void Delete()
@@ -110,7 +110,7 @@ namespace GamingTracker
                 connection.Close();
 
             }
-            Console.Write("Session successfully deleted");
+            Console.WriteLine("Session successfully deleted");
         }
 
         public static void View()
@@ -151,7 +151,36 @@ namespace GamingTracker
                 .ExportAndWriteLine(TableAligntment.Center);
             }
         }
+
+        public static GamingSession ViewById(int Id)
+        {
+            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @$"SELECT * FROM game_session where Id={Id}";
+                SqliteDataReader reader = command.ExecuteReader();
+                GamingSession s = new GamingSession();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    s.Id = reader.GetInt32(0);
+                    s.StartTime = DateTime.Parse(reader.GetString(1));
+                    s.EndTime = DateTime.Parse(reader.GetString(2));
+                    s.Duration = TimeSpan.Parse(reader.GetString(3));
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+
+                return s;
+            }
         }
+    }
 
 
     }
