@@ -72,22 +72,31 @@ namespace GamingTracker
             Console.WriteLine("What is the new end time?? ex. 1995-08-29 24:22");
             var end = Validation.IsValidDate(Console.ReadLine().Trim());
 
-            using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
+            var check = ViewById(Id);
+            if (check.Id != 0)
             {
-                connection.Open();
+                using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
+                {
+                    connection.Open();
 
-                var command = connection.CreateCommand();
-                command.CommandText = @"UPDATE game_session 
+                    var command = connection.CreateCommand();
+                    command.CommandText = @"UPDATE game_session 
                                       SET Start=@param1, End=@param2, Duration=@param3
                                       WHERE Id=@param4";
-                command.Parameters.AddWithValue("@param1", start);
-                command.Parameters.AddWithValue("@param2", end);
-                command.Parameters.AddWithValue("@param3", start.Subtract(end));
-                command.Parameters.AddWithValue("@param4", Id);
-                command.ExecuteNonQuery();
-                connection.Close();
+                    command.Parameters.AddWithValue("@param1", start);
+                    command.Parameters.AddWithValue("@param2", end);
+                    command.Parameters.AddWithValue("@param3", start.Subtract(end));
+                    command.Parameters.AddWithValue("@param4", Id);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+                Console.WriteLine("Session successfully updated");
+
             }
-            Console.WriteLine("Session successfully updated");
+            else 
+            {
+                Console.WriteLine($"No item with the id {Id} was found.");
+            }
         }
 
         public static void Delete()
@@ -96,7 +105,7 @@ namespace GamingTracker
             Console.WriteLine("What is the ID of the session you want to delete??");
             int Id = Validation.IsValidInt(Console.ReadLine().Trim());
             var check = ViewById(Id);
-            if (check.Id != 0) 
+            if (check.Id != 0)
             {
                 using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
                 {
@@ -115,8 +124,10 @@ namespace GamingTracker
                 Console.WriteLine("Session successfully deleted");
 
             }
-            
-            
+            else 
+            {
+                Console.WriteLine($"No item with the id {Id} was found.");
+            }
         }
 
         public static void View()
@@ -176,10 +187,6 @@ namespace GamingTracker
                     s.StartTime = DateTime.Parse(reader.GetString(1));
                     s.EndTime = DateTime.Parse(reader.GetString(2));
                     s.Duration = TimeSpan.Parse(reader.GetString(3));
-                }
-                else
-                {
-                    Console.WriteLine($"No item with the id {Id} was found.");
                 }
                 reader.Close();
 
