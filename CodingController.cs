@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Collections.Specialized.BitVector32;
 
 namespace GamingTracker
 {
@@ -39,9 +40,7 @@ namespace GamingTracker
             var start = Validation.IsValidDate(Console.ReadLine().Trim());
             Console.WriteLine("What time will you end?? ex. 1995-08-29 24:22");
             var end = Validation.IsValidDate(Console.ReadLine().Trim());
-
             var session = new GamingSession(start, end); 
-
 
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
             {
@@ -130,6 +129,56 @@ namespace GamingTracker
             }
         }
 
+        public static void LiveSession()
+        {
+            Console.Write("Press 1 to start live Session: ");
+            int End = Validation.IsValidInt(Console.ReadLine().Trim());
+            if (End == 1)
+            {
+                DateTime StartTime = DateTime.Now;
+
+                while (End == 1)
+                {
+                    Console.WriteLine("****Gaming Session in Progress****");
+                    Console.WriteLine("Please enter 0 to stop: ");
+                    End = Validation.IsValidInt(Console.ReadLine().Trim());
+
+                }
+
+                using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
+                {
+                    connection.Open();
+                    DateTime today = DateTime.Now;
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                    @"INSERT INTO game_session(Start, End, Duration)
+                  VALUES(@param1, @param2, @param3)"
+                    ;
+
+                    command.Parameters.AddWithValue("@param1", StartTime);
+                    command.Parameters.AddWithValue("@param2", today);
+                    command.Parameters.AddWithValue("@param3", StartTime.Subtract(today));
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+            }
+            else if(End == 0)
+            { 
+            
+            }
+            else
+            {
+                while (End != 0 || End != 1)
+                {
+                    Console.WriteLine("Please enter either 1 or 0: ");
+                    End = Validation.IsValidInt(Console.ReadLine().Trim());
+
+                }
+
+            }
+        }
+
         public static void View()
         {
             using (var connection = new SqliteConnection(ConfigurationManager.AppSettings["Key0"]))
@@ -192,7 +241,8 @@ namespace GamingTracker
 
                 return s;
             }
-        } 
+        }
+        
     }
 }
 

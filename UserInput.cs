@@ -18,6 +18,7 @@ namespace GamingTracker
                 Console.WriteLine("Type 2 to Insert session");
                 Console.WriteLine("Type 3 to Modify session");
                 Console.WriteLine("Type 4 to Delete session");
+                Console.WriteLine("Type 5 to Record session");
 
                 int key = Validation.IsValidInt(Console.ReadLine());
                 Console.Clear();
@@ -40,16 +41,15 @@ namespace GamingTracker
                     case 4:
                         CodingController.Delete();
                         break;
+                    case 5:
+                        CodingController.LiveSession();
+                        break;
 
                 }
                 Console.WriteLine("Please press any key to return to the main menu");
                 Console.ReadKey();
                 Console.Clear();
-
-
             }
-
-
 
         }
     
