@@ -42,10 +42,5 @@ namespace GamingTracker
             this.Duration = StartTime.Subtract(EndTime);
         }
 
-        TimeSpan TimeDiff(DateTime start, DateTime end)
-        {
-            return start.Subtract(end);
-        }
-
     }
 }
